@@ -26,7 +26,7 @@ CREATE TABLE amigos (
     id_user1 INT NOT NULL,
     id_user2 INT NOT NULL,
     FOREIGN KEY (id_user1) REFERENCES user(id),
-    FOREIGN KEY (id_user2) REFERENCES user(id),
+    FOREIGN KEY (id_user2) REFERENCES user(id)
 );
 
 -- Tabla para mensajes de chat (uno a uno)

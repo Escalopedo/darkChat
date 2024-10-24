@@ -14,7 +14,7 @@ session_start();
 <body>
     <div class="container">
         <div class="form-container login-container">
-            <form action="login.php" method="POST">
+            <form action="./procesos/selSesion.php" method="POST">
                 <h1>INICIAR SESIÓN</h1>
                 <input type="email" name="correo_user" placeholder="Correo Electrónico" required>
                 <input type="password" name="contrasena" placeholder="Contraseña" required>

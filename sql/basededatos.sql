@@ -1,6 +1,6 @@
 -- Crear base de datos y usarla
-CREATE DATABASE chatonline;
-USE chatonline;
+CREATE DATABASE darkweb;
+USE darkweb;
 
 -- Tabla para user
 CREATE TABLE user (

@@ -23,7 +23,7 @@ session_start();
         </div>
 
         <div class="form-container register-container">
-            <form action="insRegistro.php" method="POST">
+            <form action="./procesos/insRegistro.php" method="POST">
                 <h1>REGISTRO</h1>
                 <input type="text" name="nombre_user" placeholder="Nombre de Usuario" required>
                 <input type="email" name="correo_user" placeholder="Correo Electrónico" required>

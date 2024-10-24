@@ -16,8 +16,8 @@ CREATE TABLE solicitudes (
     id_emisor INT NOT NULL,
     id_receptor INT NOT NULL,
     estado ENUM('ACEPTADA', 'RECHAZADA', 'PENDIENTE') NOT NULL,
-    FOREIGN KEY (id_emisor) REFERENCES user(id) ON DELETE CASCADE, 
-    FOREIGN KEY (id_receptor) REFERENCES user(id) ON DELETE CASCADE
+    FOREIGN KEY (id_emisor) REFERENCES user(id), 
+    FOREIGN KEY (id_receptor) REFERENCES user(id)
 );
 
 -- Tabla para amigos 
@@ -25,8 +25,8 @@ CREATE TABLE amigos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_user1 INT NOT NULL,
     id_user2 INT NOT NULL,
-    FOREIGN KEY (id_user1) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_user2) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_user1) REFERENCES user(id),
+    FOREIGN KEY (id_user2) REFERENCES user(id),
 );
 
 -- Tabla para mensajes de chat (uno a uno)
@@ -35,8 +35,8 @@ CREATE TABLE mensajes (
     id_emisor INT NOT NULL,
     id_receptor INT NOT NULL,
     texto TEXT NOT NULL,
-    FOREIGN KEY (id_emisor) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_receptor) REFERENCES user(id) ON DELETE CASCADE
+    FOREIGN KEY (id_emisor) REFERENCES user(id),
+    FOREIGN KEY (id_receptor) REFERENCES user(id)
 );  
 
 -- Resumen de relaciones:

@@ -20,13 +20,11 @@ CREATE TABLE solicitudes (
     FOREIGN KEY (id_receptor) REFERENCES user(id)
 );
 
--- Tabla para amigos
+-- Tabla para amigos 
 CREATE TABLE amigos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_user1 INT NOT NULL,
     id_user2 INT NOT NULL,
-    FOREIGN KEY (id_user1) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_user2) REFERENCES user(id) ON DELETE CASCADE
     FOREIGN KEY (id_user1) REFERENCES user(id),
     FOREIGN KEY (id_user2) REFERENCES user(id),
 );

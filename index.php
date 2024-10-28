@@ -1,5 +1,4 @@
 <?php
-// Comienza la sesión
 session_start();
 ?>
 
@@ -8,13 +7,14 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Online - Login y Registro</title>
+    <title>DARK WEB</title>
     <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
         <div class="form-container login-container">
-            <form action="login.php" method="POST">
+            <form action="./procesos/selSesion.php" method="POST">
                 <h1>INICIAR SESIÓN</h1>
                 <input type="email" name="correo_user" placeholder="Correo Electrónico" required>
                 <input type="password" name="contrasena" placeholder="Contraseña" required>
@@ -23,11 +23,11 @@ session_start();
         </div>
 
         <div class="form-container register-container">
-            <form action="register.php" method="POST">
+            <form action="./procesos/insRegistro.php" method="POST">
                 <h1>REGISTRO</h1>
-                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" required>
-                <input type="email" name="correo_user" placeholder="Correo Electrónico" required>
-                <input type="password" name="contrasena" placeholder="Contraseña" required>
+                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" >
+                <input type="email" name="correo_user" placeholder="Correo Electrónico" >
+                <input type="password" name="contrasena" placeholder="Contraseña" >
                 <button type="submit">REGISTRARSE</button>
             </form>
         </div>

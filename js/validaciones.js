@@ -1,91 +1,119 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Selecciona el formulario de registro dentro del contenedor con la clase "register-container"
+    // Almacenamos el formulario de registro en una variable llamada registerForm
     const registerForm = document.querySelector(".register-container form");
 
-    // Función para mostrar un mensaje de error debajo del campo correspondiente
+    // Función para mostrar un mensaje de error
     function showError(element, message) {
-        // Selecciona el elemento de error inmediatamente después del campo (si ya existe)
-        let errorElement = element.nextElementSibling;
-        // Si no hay un mensaje de error o no tiene la clase "error-message", crea un nuevo div para el mensaje de error
-        if (!errorElement || !errorElement.classList.contains("error-message")) {
+        // Crear un div para el mensaje de error
+        let errorElement = document.getElementById(`${element.name}-error`);
+        
+        // Si no existe, lo creamos
+        if (!errorElement) {
             errorElement = document.createElement("div");
-            errorElement.classList.add("error-message");
+            errorElement.id = `${element.name}-error`;
+            errorElement.className = "error-message";
             element.parentNode.insertBefore(errorElement, element.nextSibling);
         }
-        // Asignamos el mensaje de error proporcionado como texto del elemento de error
+        
+        // Establecemos el mensaje de error
         errorElement.textContent = message;
     }
 
     // Función para limpiar los mensajes de error
-    function clearErrors(form) {
-        const errorMessages = form.querySelectorAll(".error-message");
-        errorMessages.forEach(msg => msg.remove());
+    function clearErrors(element) {
+        // Buscar el mensaje de error por ID
+        const errorElement = document.getElementById(`${element.name}-error`);
+        
+        // Si existe, eliminarlo
+        if (errorElement) {
+            errorElement.remove();
+        }
     }
 
-    // Función para validar el formulario de registro
-    function validateRegisterForm(event) {
-        clearErrors(registerForm);
+    // Funciones de validación individuales
+    function validateUsername(element) {
+        clearErrors(element);
+        if (element.value.trim() === "") {
+            showError(element, "El nombre de usuario es obligatorio.");
+            return false; 
+        }
 
-        const username = registerForm.querySelector("input[name='nombre_user']");
-        const email = registerForm.querySelector("input[name='correo_user']");
-        const password = registerForm.querySelector("input[name='contrasena']");
+        if (element.value.length > 20) {
+            showError(element, "El nombre de usuario no puede contener más de 20 caracteres.");
+            return false;
+        }
+
+        return true;
+    }
+
+    function validateEmail(element) {
+        clearErrors(element);
+        if (element.value.trim() === "") {
+            showError(element, "El correo electrónico es obligatorio.");
+            return false; // Indicar que hay un error
+        }
+
+        if (!element.value.includes("@")) {
+            showError(element, "El correo debe contener un '@'.");
+            return false;
+        }
+
+        return true;
+    }
+
+    function validatePassword(element) {
+        clearErrors(element);
+        if (element.value.trim() === "") {
+            showError(element, "La contraseña es obligatoria.");
+            return false;
+        }
+        
+        if (element.value.length < 6) {
+            showError(element, "La contraseña debe tener al menos 6 caracteres.");
+            return false;
+        }
+
+        if (!/^[a-zA-Z0-9]+$/.test(element.value)) {
+            showError(element, "La contraseña no debe incluir caracteres especiales.");
+            return false;
+        }
+
+        if (!/[a-zA-Z]/.test(element.value) || !/[0-9]/.test(element.value)) {
+            showError(element, "La contraseña debe incluir al menos una letra y un número.");
+            return false;
+        }
+
+        return true; // Validación exitosa
+    }
+
+    // Función para validar el formulario al enviar
+    function validateRegisterForm(event) {
         let valid = true;
 
-        // Validación del nombre de usuario
-        // No se puede dejar el campo vacio
-        if (username.value.trim() === "") {
-            showError(username, "El nombre de usuario es obligatorio.");
-            valid = false;
-        }
+        // Validar todos los campos y almacenar si hay errores
+        const usernameInput = registerForm.querySelector("input[name='nombre_user']");
+        const emailInput = registerForm.querySelector("input[name='correo_user']");
+        const passwordInput = registerForm.querySelector("input[name='contrasena']");
 
-        // No puede contener mas de 20 caracteres
-        if (username.value.length>20) {
-            showError(username, "El nombre de usuario no puede contener mas de 20 caracteres.");
-            valid = false;
-        }
+        valid &= validateUsername(usernameInput);
+        valid &= validateEmail(emailInput);
+        valid &= validatePassword(passwordInput);
 
-        // Validación de correo
-        // No se puede dejar el campo vacio
-        if (email.value.trim() === "") {
-            showError(email, "El correo electrónico es obligatorio.");
-            valid = false;
-        }
-
-        if (!email.value.includes("@")) {
-            showError(email, "El correo debe contener un '@'.");
-            valid = false;
-        }
-
-        // Validación de contraseña
-        // No se puede dejar el campo vacio
-        if (password.value.trim() === "") {
-            showError(password, "La contraseña es obligatoria.");
-            valid = false;
-        }
-
-        // Debe contener mas de 6 caracteres
-        if (password.value.length > 0 && password.value.length < 6) {
-            showError(password, "La contraseña debe tener al menos 6 caracteres.");
-            valid = false;
-        }
-
-        // No se puede incluir caracteres especiales
-        if (password.value.length >= 6 && !/^[a-zA-Z0-9]+$/.test(password.value)) {
-            showError(password, "La contraseña no debe incluir caracteres especiales.");
-            valid = false;
-        }
-
-        // La contraseña debe contener al menos una letra y un número
-        if (password.value.length >= 6 && (!/[a-zA-Z]/.test(password.value) || !/[0-9]/.test(password.value))) {
-            showError(password, "La contraseña debe incluir al menos una letra y un número.");
-            valid = false;
-        }
-
+        // Si hay errores, evitar el envío del formulario
         if (!valid) {
             event.preventDefault();
         }
     }
 
-    // Agrega el event listener para validar al enviar el formulario de registro
+    // Asignación de eventos onblur para cada campo
+    const usernameInput = registerForm.querySelector("input[name='nombre_user']");
+    const emailInput = registerForm.querySelector("input[name='correo_user']");
+    const passwordInput = registerForm.querySelector("input[name='contrasena']");
+
+    usernameInput.onblur = function () { validateUsername(this); };
+    emailInput.onblur = function () { validateEmail(this); };
+    passwordInput.onblur = function () { validatePassword(this); };
+
+    // Agregar el evento submit para validar antes de enviar
     registerForm.addEventListener("submit", validateRegisterForm);
 });

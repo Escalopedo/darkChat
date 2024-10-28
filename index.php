@@ -26,9 +26,9 @@ session_start();
         <div class="form-container register-container">
             <form action="./procesos/insRegistro.php" method="POST">
                 <h1>REGISTRO</h1>
-                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" >
-                <input type="email" name="correo_user" placeholder="Correo Electrónico" >
-                <input type="password" name="contrasena" placeholder="Contraseña" >
+                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" onblur="validateUsername(this)">
+                <input type="email" name="correo_user" placeholder="Correo Electrónico" onblur="validateEmail(this)">
+                <input type="password" name="contrasena" placeholder="Contraseña" onblur="validatePassword(this)">
                 <button type="submit">REGISTRARSE</button>
             </form>
         </div>

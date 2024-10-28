@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['nombre_user'] = $user['nombre_user'];
             
-            // Redirige al usuario a su escritorio
-            header("Location: ../escritorio.php");
+            // Redirige al usuario a la página de inicio
+            header("Location: ../inicio.php");
             exit();
         } else {
             echo "<script>alert('Contraseña incorrecta.');</script>";

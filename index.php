@@ -1,5 +1,4 @@
 <?php
-// Comienza la sesión
 session_start();
 ?>
 
@@ -26,9 +25,9 @@ session_start();
         <div class="form-container register-container">
             <form action="./procesos/insRegistro.php" method="POST">
                 <h1>REGISTRO</h1>
-                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" required>
-                <input type="email" name="correo_user" placeholder="Correo Electrónico" required>
-                <input type="password" name="contrasena" placeholder="Contraseña" required>
+                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" >
+                <input type="email" name="correo_user" placeholder="Correo Electrónico" >
+                <input type="password" name="contrasena" placeholder="Contraseña" >
                 <button type="submit">REGISTRARSE</button>
             </form>
         </div>

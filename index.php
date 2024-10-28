@@ -10,6 +10,7 @@ session_start();
     <title>DARK WEB</title>
     <link rel="stylesheet" href="./css/estilos.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <script src="./js/validaciones.js"></script>
 </head>
 <body>
     <div class="container">

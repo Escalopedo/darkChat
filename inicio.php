@@ -160,7 +160,7 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
                     <!-- Formulario para enviar mensaje -->
                     <form action="chat.php" method="POST">
                         <input type="hidden" name="id_receptor" value="<?php echo $amigo_id; ?>">
-                        <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        <textarea name="mensaje" required></textarea>
                         <button type="submit" name="enviar_mensaje">Enviar</button>
                     </form>
                 <?php else: ?>

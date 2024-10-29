@@ -124,13 +124,9 @@ header {
     width: 70%;
     padding: 8px;
     background-color: rgba(255, 255, 255, 0.9);
-}
-
-.chat-section h3 {
-    color: #075e54;
-    font-size: 1.1em;
-    margin-top: 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Para poder posicionar el formulario fijo */
 }
 
 /* Estilo para la sección de mensajes */
@@ -138,8 +134,9 @@ header {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    max-height: 400px;
-    overflow-y: auto;
+    max-height: 400px; /* Altura máxima del área de mensajes */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    flex: 1; /* Permite que ocupe el espacio restante */
 }
 
 .message {
@@ -168,4 +165,11 @@ header {
 .message p {
     margin: 0;
     font-size: 14px;
+}
+.message-form {
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    padding: 10px; /* Espaciado interno */
+    background-color: #f1f1f1; /* Color de fondo para el formulario */
+    border-top: 1px solid #e0e0e0; /* Borde superior para separación */
 }

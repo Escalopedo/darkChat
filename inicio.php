@@ -147,26 +147,27 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
 
             <!-- Sección del chat -->
             <div class="chat-section">
-                <h3>Chat</h3>
-                <?php if ($amigo_id): ?>
-                    <div class="chat-messages">
-                        <?php foreach ($mensajes as $mensaje): ?>
-                            <div class="message <?php echo $mensaje['id_emisor'] == $user_id ? 'sent' : 'received'; ?>">
-                                <p><?php echo htmlspecialchars($mensaje['texto']); ?></p>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+    <h3>Chat</h3>
+    <?php if ($amigo_id): ?>
+        <div class="chat-messages">
+            <?php foreach ($mensajes as $mensaje): ?>
+                <div class="message <?php echo $mensaje['id_emisor'] == $user_id ? 'sent' : 'received'; ?>">
+                    <p><?php echo htmlspecialchars($mensaje['texto']); ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
-                    <!-- Formulario para enviar mensaje -->
-                    <form action="chat.php" method="POST">
-                        <input type="hidden" name="id_receptor" value="<?php echo $amigo_id; ?>">
-                        <textarea name="mensaje" required></textarea>
-                        <button type="submit" name="enviar_mensaje">Enviar</button>
-                    </form>
-                <?php else: ?>
-                    <p>Selecciona un amigo para iniciar el chat.</p>
-                <?php endif; ?>
-            </div>
+        <!-- Formulario para enviar mensaje -->
+        <form action="chat.php" method="POST" class="message-form">
+            <input type="hidden" name="id_receptor" value="<?php echo $amigo_id; ?>">
+            <textarea name="mensaje" required></textarea>
+            <button type="submit" name="enviar_mensaje">Enviar</button>
+        </form>
+    <?php else: ?>
+        <p>Selecciona un amigo para iniciar el chat.</p>
+    <?php endif; ?>
+</div>
+
         </div>
     </div></body>
 </html>

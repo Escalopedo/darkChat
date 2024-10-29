@@ -166,10 +166,34 @@ header {
     margin: 0;
     font-size: 14px;
 }
+
 .message-form {
     display: flex;
     align-items: center; /* Alinea los elementos verticalmente en el centro */
     padding: 10px; /* Espaciado interno */
     background-color: #f1f1f1; /* Color de fondo para el formulario */
     border-top: 1px solid #e0e0e0; /* Borde superior para separación */
+}
+
+.message-form textarea {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    margin-right: 10px; /* Espaciado a la derecha */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde de la caja de texto */
+    resize: none; /* Impide cambiar el tamaño del textarea */
+    max-height: 100px; /* Altura máxima para el textarea */
+}
+
+.message-form button {
+    padding: 10px 15px; /* Espaciado del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+.message-form button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
 }

@@ -9,6 +9,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $nombre_user = $_SESSION['nombre_user'];
+$user_id = $_SESSION['user_id'];
+
+$amigo_id = isset($_GET['amigo_id']) ? intval($_GET['amigo_id']) : null; // Obtener amigo_id si se selecciona
 
 // Manejar la solicitud de amistad
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['solicitar_amigo'])) {
@@ -64,6 +67,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion_solicitud'])) {
     }
 }
 
+// Obtener mensajes entre el usuario autenticado y el amigo seleccionado
+$mensajes = [];
+if ($amigo_id) {
+    $query_mensajes = "
+        SELECT * 
+        FROM mensajes 
+        WHERE (id_emisor = $user_id AND id_receptor = $amigo_id) 
+           OR (id_emisor = $amigo_id AND id_receptor = $user_id) 
+        ORDER BY id ASC";
+    $result_mensajes = mysqli_query($conn, $query_mensajes);
+    
+    // Almacena los mensajes en un array
+    if ($result_mensajes) {
+        $mensajes = mysqli_fetch_all($result_mensajes, MYSQLI_ASSOC);
+    }
+}
+
 // Obtener la lista de amigos sin duplicados
 $query_amigos = "
     SELECT DISTINCT u.* 
@@ -111,53 +131,42 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
                 </form>
             </div>
 
-            <!-- Sección de lista de amigos (centro) -->
+            <!-- Sección de amigos -->
             <div class="friends-list">
                 <h3>Amigos</h3>
                 <div class="friends-container">
-                    <div class="friends-grid">
-                        <?php foreach ($amigos as $amigo): ?>
-                            <div class="friend-card">
-                                <p><?php echo htmlspecialchars($amigo['nombre_user']); ?></p>
+                    <?php foreach ($amigos as $amigo): ?>
+                        <div class="friend-card">
+                            <p><?php echo htmlspecialchars($amigo['nombre_user']); ?></p>
+                            <!-- Link para abrir el chat con el amigo seleccionado -->
+                            <a href="?amigo_id=<?php echo $amigo['id']; ?>">Chat</a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Sección del chat -->
+            <div class="chat-section">
+                <h3>Chat</h3>
+                <?php if ($amigo_id): ?>
+                    <div class="chat-messages">
+                        <?php foreach ($mensajes as $mensaje): ?>
+                            <div class="message <?php echo $mensaje['id_emisor'] == $user_id ? 'sent' : 'received'; ?>">
+                                <p><?php echo htmlspecialchars($mensaje['texto']); ?></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
-                </div>
-            </div>
 
-            <!-- Sección de solicitudes pendientes (derecha) -->
-            <div class="solicitudes-list">
-                <h3>Solicitudes Pendientes</h3>
-                <div class="solicitudes-container">
-                    <?php if (count($solicitudes) > 0): ?>
-                        <?php foreach ($solicitudes as $solicitud): ?>
-                            <div class="solicitud-card">
-                                <p><?php echo htmlspecialchars($solicitud['nombre_emisor']); ?> ha enviado una solicitud.</p>
-                                <form method="POST">
-                                    <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['id']; ?>">
-                                    <input type="hidden" name="accion" value="aceptar"> <!-- Para aceptar -->
-                                    <button type="submit" name="accion_solicitud" value="aceptar">Aceptar</button>
-                                </form>
-                                <form method="POST">
-                                    <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['id']; ?>">
-                                    <input type="hidden" name="accion" value="denegar"> <!-- Para denegar -->
-                                    <button type="submit" name="accion_solicitud" value="denegar">Denegar</button>
-                                </form>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>No tienes solicitudes pendientes.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-
-            <!-- Sección del chat (derecha) -->
-            <div class="chat-section">
-                <h3>Chat</h3>
-                <hr>
-                <!-- Aquí iría el contenido del chat -->
+                    <!-- Formulario para enviar mensaje -->
+                    <form action="chat.php" method="POST">
+                        <input type="hidden" name="id_receptor" value="<?php echo $amigo_id; ?>">
+                        <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        <button type="submit" name="enviar_mensaje">Enviar</button>
+                    </form>
+                <?php else: ?>
+                    <p>Selecciona un amigo para iniciar el chat.</p>
+                <?php endif; ?>
             </div>
         </div>
-    </div>
-</body>
+    </div></body>
 </html>

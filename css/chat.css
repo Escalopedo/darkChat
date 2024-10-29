@@ -132,3 +132,40 @@ header {
     margin-top: 0;
     text-align: center;
 }
+
+/* Estilo para la sección de mensajes */
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Mensajes enviados por el usuario (alineación derecha) */
+.message.sent {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* color para mensajes enviados */
+    text-align: right;
+}
+
+/* Mensajes recibidos (alineación izquierda) */
+.message.received {
+    align-self: flex-start;
+    background-color: #ffffff; /* color para mensajes recibidos */
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+/* Opcional: estilos para el texto de los mensajes */
+.message p {
+    margin: 0;
+    font-size: 14px;
+}

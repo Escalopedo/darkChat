@@ -1,5 +1,10 @@
 <?php
 session_start();
+$errors = $_SESSION['errors'] ?? [];
+$username = $_SESSION['nombre_user'] ?? '';
+$email = $_SESSION['correo_user'] ?? '';
+$password = $_SESSION['contrasena'] ?? '';
+session_unset(); // Limpiar las variables de sesión después de usarlas
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +29,23 @@ session_start();
         </div>
 
         <div class="form-container register-container">
-            <form action="./procesos/insRegistro.php" method="POST">
+            <form action="./js/validaciones.php" method="POST">
                 <h1>REGISTRO</h1>
-                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" onblur="validateUsername(this)">
-                <input type="email" name="correo_user" placeholder="Correo Electrónico" onblur="validateEmail(this)">
-                <input type="password" name="contrasena" placeholder="Contraseña" onblur="validatePassword(this)">
+                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" value="<?php echo htmlspecialchars($username); ?>" onblur="validateUsername(this)">
+                <?php if (!empty($errors['nombre_user'])): ?>
+                    <p class="error"><?php echo $errors['nombre_user']; ?></p>
+                <?php endif; ?>
+
+                <input type="email" name="correo_user" placeholder="Correo Electrónico" value="<?php echo htmlspecialchars($email); ?>" onblur="validateEmail(this)">
+                <?php if (!empty($errors['correo_user'])): ?>
+                    <p class="error"><?php echo $errors['correo_user']; ?></p>
+                <?php endif; ?>
+
+                <input type="password" name="contrasena" placeholder="Contraseña" value="<?php echo htmlspecialchars($password); ?>" onblur="validatePassword(this)">
+                <?php if (!empty($errors['contrasena'])): ?>
+                    <p class="error"><?php echo $errors['contrasena']; ?></p>
+                <?php endif; ?>
+
                 <button type="submit">REGISTRARSE</button>
             </form>
         </div>

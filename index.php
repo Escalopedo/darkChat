@@ -12,6 +12,11 @@ if (isset($_SESSION['success'])) {
     unset($_SESSION['success']); // Elimina el mensaje después de mostrarlo
 }
 
+if (isset($_SESSION['error_message'])) {
+    echo "<div class='error-message' style='color: red;'>" . $_SESSION['error_message'] . "</div>";
+    unset($_SESSION['error_message']); // Elimina el mensaje después de mostrarlo
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -33,17 +38,6 @@ if (isset($_SESSION['success'])) {
                 <button type="submit">ENTRAR</button>
             </form>
         </div>
-
-            <!-- Mostrar mensaje de error si existe -->
-                <?php if (isset($_SESSION['error_message'])): ?>
-            <div class="error-message">
-                <?php 
-                    echo $_SESSION['error_message']; 
-                    unset($_SESSION['error_message']); // Elimina el mensaje después de mostrarlo
-                ?>
-            </div>
-        <?php endif; ?>
-
         <div class="form-container register-container">
             <form action="./procesos/insRegistro.php" method="POST">
                 <h1>REGISTRO</h1>

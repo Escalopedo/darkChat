@@ -30,13 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Guarda el mensaje de error en la sesión
             $_SESSION['error_message'] = 'CONTRASEÑA INCORRECTA.';
-            header("Location: ../index.php");
+            header("Location: ../index.php"); // Redirige a la página de inicio de sesión
             exit();
         }
     } else {
         // Guarda el mensaje de error en la sesión
         $_SESSION['error_message'] = 'USUARIO NO EXISTE.';
-        header("Location: ../index.php");
+        header("Location: ../index.php"); // Redirige a la página de inicio de sesión
         exit();
     }
 }

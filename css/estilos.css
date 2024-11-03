@@ -132,6 +132,7 @@ body {
 
 .chat-section {
     padding: 10px;
+    width: 80vh;
 }
 
 .chat-messages {
@@ -179,37 +180,13 @@ body {
 
 
 
-
-
-
-
-
-
+.text-enviar {
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
 
 .message-form {
-    margin-top: 10px;
-    width: 100%; /* El formulario ocupa el ancho completo */
-}
-
-.message-form textarea {
-    width: 100%; /* Para que el área de texto ocupe el 100% del ancho */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none; /* Evita que el usuario cambie el tamaño del área de texto */
-    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-    font-family: 'Teko', sans-serif;
-}
-
-.message-form button {
-    width: 100%; /* El botón ocupará el 100% del ancho del formulario */
-    padding: 15px; /* Ajusta el espacio interno */
-    background-color: #4facfe;
-    color: #fff;
-    font-size: 16px;
-    font-family: 'Teko', sans-serif;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    width: 100%; /* Asegura que el formulario ocupe el ancho completo */
 }

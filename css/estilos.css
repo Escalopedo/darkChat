@@ -116,3 +116,9 @@ body {
     font-family: "Teko", sans-serif;
     font-weight: 700;
 }
+
+.error-message {
+    color: red;
+    margin: 10px 0;
+    text-align: center;
+}

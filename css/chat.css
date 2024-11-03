@@ -129,7 +129,6 @@ header {
     position: relative; /* Para poder posicionar el formulario fijo */
 }
 
-/* Estilo para la sección de mensajes */
 .chat-messages {
     display: flex;
     flex-direction: column;
@@ -137,6 +136,7 @@ header {
     max-height: 400px; /* Altura máxima del área de mensajes */
     overflow-y: auto; /* Permite el desplazamiento vertical */
     flex: 1; /* Permite que ocupe el espacio restante */
+    margin-bottom: 10px; /* Espacio inferior para el formulario */
 }
 
 .message {
@@ -173,6 +173,10 @@ header {
     padding: 10px; /* Espaciado interno */
     background-color: #f1f1f1; /* Color de fondo para el formulario */
     border-top: 1px solid #e0e0e0; /* Borde superior para separación */
+    position: absolute; /* Cambiar a posición absoluta */
+    bottom: 0; /* Alinear al fondo */
+    left: 0; /* Alinear a la izquierda */
+    right: 0; /* Alinear a la derecha */
 }
 
 .message-form textarea {
@@ -183,6 +187,7 @@ header {
     border: 1px solid #ccc; /* Borde de la caja de texto */
     resize: none; /* Impide cambiar el tamaño del textarea */
     max-height: 100px; /* Altura máxima para el textarea */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
 }
 
 .message-form button {

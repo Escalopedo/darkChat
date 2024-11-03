@@ -28,10 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../inicio.php");
             exit();
         } else {
-            echo "<script>alert('Contraseña incorrecta.');</script>";
+            // Guarda el mensaje de error en la sesión
+            $_SESSION['error_message'] = 'CONTRASEÑA INCORRECTA.';
+            header("Location: ../index.php");
+            exit();
         }
     } else {
-        echo "<script>alert('El usuario no existe.');</script>";
+        // Guarda el mensaje de error en la sesión
+        $_SESSION['error_message'] = 'USUARIO NO EXISTE.';
+        header("Location: ../index.php");
+        exit();
     }
 }
 

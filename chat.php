@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
     if (!empty($mensaje)) {
         $query = "INSERT INTO mensajes (id_emisor, id_receptor, texto) VALUES ($user_id, $amigo_id, '$mensaje')";
         mysqli_query($conn, $query);
-        // No redirigir, simplemente continuar mostrando el chat
-    }
+        header("Location: chat.php");  
+}
 }
 ?>
 
@@ -46,35 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat con Amigo</title>
     <link rel="stylesheet" href="./css/chat.css">
-    <style>
-        /* Estilo para asegurar que el formulario siempre sea visible */
-        .chat-section {
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 100px); /* Ajustar según la altura deseada */
-            overflow-y: auto;
-        }
-        .chat-messages {
-            flex-grow: 1; /* Ocupa todo el espacio disponible */
-            overflow-y: auto; /* Habilita el desplazamiento si hay muchos mensajes */
-        }
-        .message-form {
-            display: flex;
-            padding: 10px;
-            background-color: #f1f1f1; /* Color de fondo para el formulario */
-        }
-        .message-form textarea {
-            flex-grow: 1; /* Ocupa el espacio disponible */
-            margin-right: 10px; /* Espacio entre textarea y botón */
-        }
-        .author {
-            font-size: 12px; /* Tamaño de fuente para el autor */
-            color: #666; /* Color gris para el texto del autor */
-            margin-top: 5px; /* Espaciado superior para separar del mensaje */
-            text-align: right; /* Alinear el texto del autor a la derecha */
-            display: block; /* Hacer que el span ocupe toda la línea */
-        }
-    </style>
 </head>
 <body>
     <div class="chat-container">
@@ -92,13 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
                     </div>
                 <?php endforeach; ?>
             </div>
-
-            <form action="chat.php" method="POST" class="message-form">
-                <input type="hidden" name="amigo_id" value="<?php echo $amigo_id; ?>">
-                <textarea name="mensaje" required></textarea>
-                <button type="submit" name="enviar_mensaje">Enviar</button>
-            </form>
         </div>
     </div>
+            <form action="chat.php" method="POST" class="message-form">
+            <input type="hidden" name="amigo_id" value="<?php echo $amigo_id; ?>">
+            <textarea name="mensaje" required></textarea>
+            <button type="submit" name="enviar_mensaje">Enviar</button>
+        </form>
 </body>
 </html>

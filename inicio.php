@@ -123,6 +123,32 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
                     <?php endforeach; ?>
                 </div>
             </div>
+
+            <!-- Sección de solicitudes pendientes (derecha) -->
+            <div class="solicitudes-list">
+                <h3>Solicitudes Pendientes</h3>
+                <div class="solicitudes-container">
+                    <?php if (count($solicitudes) > 0): ?>
+                        <?php foreach ($solicitudes as $solicitud): ?>
+                            <div class="solicitud-card">
+                                <p><?php echo htmlspecialchars($solicitud['nombre_emisor']); ?> ha enviado una solicitud.</p>
+                                <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['id']; ?>">
+                                    <input type="hidden" name="accion" value="aceptar"> <!-- Para aceptar -->
+                                    <button type="submit" name="accion_solicitud" value="aceptar">Aceptar</button>
+                                </form>
+                                <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="id_solicitud" value="<?php echo $solicitud['id']; ?>">
+                                    <input type="hidden" name="accion" value="denegar"> <!-- Para denegar -->
+                                    <button type="submit" name="accion_solicitud" value="denegar">Denegar</button>
+                                </form>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No tienes solicitudes pendientes.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 </body>

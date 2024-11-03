@@ -1,0 +1,124 @@
+/* Importar la fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
+
+body {
+    font-family: 'Teko', sans-serif; /* Aplica la nueva fuente */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondoInicio.gif); /* Asegúrate de que la ruta sea correcta */
+    background-size: cover; /* Ajusta la imagen al contenedor manteniendo la relación de aspecto */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    color: #f5f5f5; /* Color del texto */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los formularios */
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px; /* Redondear el contenedor principal */
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+    flex: 1; /* Esto permite que ambos contenedores sean iguales */
+    padding: 40px; /* Espaciado interno */
+    background-color: rgba(30, 30, 30, 0.9); /* Color de fondo negro transparente */
+    margin: 0 10px; /* Espaciado horizontal entre contenedores */
+    display: flex; /* Usa flexbox para alinear el contenido */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    border-radius: 10px; /* Redondear las esquinas del contenedor de formularios */
+}
+
+.form-container h1 {
+    margin-bottom: 20px;
+    color: #00f2fe; /* Color del título */
+    text-align: center; /* Centra el título */
+    font-weight: 700; /* Peso de la fuente por defecto */
+}
+
+.form-container input,
+.form-container button {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 15px; /* Espaciado interno */
+    margin: 10px 0; /* Margen vertical entre inputs y botones */
+    border: 1px solid #333; /* Borde oscuro */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: #2a2a2a; /* Color de fondo de los campos */
+    color: #f5f5f5; /* Color del texto en los campos */
+    font-size: 16px; /* Asegura que el tamaño del texto sea consistente */
+    box-sizing: border-box; /* Asegura que el ancho incluya el padding y el borde */
+}
+
+/* Estilos para el texto del placeholder */
+.form-container input::placeholder {
+    color: #bbb; /* Color del placeholder */
+    font-family: 'Teko', sans-serif; /* Cambia la fuente del placeholder */
+}
+
+/* Estilo del botón */
+.form-container button {
+    background-color: #4facfe; /* Color del botón */
+    border: none; /* Sin borde para que coincida con los inputs */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-family: 'Teko', sans-serif; /* Cambia la fuente del botón */
+}
+
+.form-container button:hover {
+    background-color: #00f2fe; /* Color del botón al pasar el mouse */
+}
+
+.form-container p {
+    text-align: center;
+    margin-top: 20px;
+    color: #bbb; /* Color del texto en los párrafos */
+}
+
+.form-container a {
+    color: #00f2fe; /* Color de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.form-container a:hover {
+    text-decoration: underline; /* Subrayar al pasar el mouse */
+}
+
+/* Clase personalizada para la fuente Teko con peso variable */
+.teko-300 {
+    font-family: "Teko", sans-serif;
+    font-weight: 300;
+}
+
+.teko-400 {
+    font-family: "Teko", sans-serif;
+    font-weight: 400;
+}
+
+.teko-500 {
+    font-family: "Teko", sans-serif;
+    font-weight: 500;
+}
+
+.teko-600 {
+    font-family: "Teko", sans-serif;
+    font-weight: 600;
+}
+
+.teko-700 {
+    font-family: "Teko", sans-serif;
+    font-weight: 700;
+}
+
+.error-message {
+    color: red;
+    margin: 10px 0;
+    text-align: center;
+}

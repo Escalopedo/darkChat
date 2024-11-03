@@ -11,9 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $nombre_user = $_SESSION['nombre_user'];
 $user_id = $_SESSION['user_id'];
 
-$amigo_id = isset($_GET['amigo_id']) ? intval($_GET['amigo_id']) : null; // Obtener amigo_id si se selecciona
-
-// Manejar la solicitud de amistad
+// Manejar solicitud de amistad
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['solicitar_amigo'])) {
     $nombre_usuario = htmlspecialchars($_POST['nombre_usuario']);
     $id_emisor = $_SESSION['user_id'];
@@ -46,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['solicitar_amigo'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion_solicitud'])) {
     $id_solicitud = intval($_POST['id_solicitud']);
     
-    // Verifica si se ha enviado una acción
     if (isset($_POST['accion'])) {
         $accion = htmlspecialchars($_POST['accion']); // "aceptar" o "denegar"
 
@@ -67,24 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion_solicitud'])) {
     }
 }
 
-// Obtener mensajes entre el usuario autenticado y el amigo seleccionado
-$mensajes = [];
-if ($amigo_id) {
-    $query_mensajes = "
-        SELECT * 
-        FROM mensajes 
-        WHERE (id_emisor = $user_id AND id_receptor = $amigo_id) 
-           OR (id_emisor = $amigo_id AND id_receptor = $user_id) 
-        ORDER BY id ASC";
-    $result_mensajes = mysqli_query($conn, $query_mensajes);
-    
-    // Almacena los mensajes en un array
-    if ($result_mensajes) {
-        $mensajes = mysqli_fetch_all($result_mensajes, MYSQLI_ASSOC);
-    }
-}
-
-// Obtener la lista de amigos sin duplicados
+// Obtener la lista de amigos
 $query_amigos = "
     SELECT DISTINCT u.* 
     FROM amigos a 
@@ -116,13 +96,11 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
 </head>
 <body>
     <div class="chat-container">
-        <!-- Encabezado del chat -->
         <header>
             <h2>Hola, <?php echo htmlspecialchars($nombre_user); ?></h2>
         </header>
 
         <div class="columns-container">
-            <!-- Sección de búsqueda de amigos (izquierda) -->
             <div class="search-friends">
                 <h3>Buscar Amigos</h3>
                 <form method="POST">
@@ -131,41 +109,19 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
                 </form>
             </div>
 
-            <!-- Sección de amigos -->
             <div class="friends-list">
                 <h3>Amigos</h3>
                 <div class="friends-container">
                     <?php foreach ($amigos as $amigo): ?>
                         <div class="friend-card">
                             <p><?php echo htmlspecialchars($amigo['nombre_user']); ?></p>
-                            <!-- Link para abrir el chat con el amigo seleccionado -->
-                            <a href="?amigo_id=<?php echo $amigo['id']; ?>">Chat</a>
+                            <form action="chat.php" method="POST" style="display:inline;">
+                                <input type="hidden" name="amigo_id" value="<?php echo $amigo['id']; ?>">
+                                <button type="submit">Chat</button>
+                            </form>
                         </div>
                     <?php endforeach; ?>
                 </div>
-            </div>
-
-            <!-- Sección del chat -->
-            <div class="chat-section">
-            <h3>Chat</h3>
-            <?php if ($amigo_id): ?>
-                <div class="chat-messages">
-                    <?php foreach ($mensajes as $mensaje): ?>
-                        <div class="message <?php echo $mensaje['id_emisor'] == $user_id ? 'sent' : 'received'; ?>">
-                            <p><?php echo htmlspecialchars($mensaje['texto']); ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-
-            <!-- Formulario para enviar mensaje -->
-            <form action="chat.php" method="POST" class="message-form">
-            <input type="hidden" name="id_receptor" value="<?php echo $amigo_id; ?>">
-            <textarea name="mensaje" required></textarea>
-            <button type="submit" name="enviar_mensaje">Enviar</button>
-            </form>
-                 <?php else: ?>
-                <p>Selecciona un amigo para iniciar el chat.</p>
-                <?php endif; ?>
             </div>
         </div>
     </div>

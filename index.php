@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+// Verifica si hay mensajes de error o éxito en la sesión
+if (isset($_SESSION['error'])) {
+    echo "<div style='color: red;'>" . $_SESSION['error'] . "</div>";
+    unset($_SESSION['error']); // Elimina el mensaje después de mostrarlo
+}
+
+if (isset($_SESSION['success'])) {
+    echo "<div style='color: green;'>" . $_SESSION['success'] . "</div>";
+    unset($_SESSION['success']); // Elimina el mensaje después de mostrarlo
+}
+
 ?>
 
 <!DOCTYPE html>

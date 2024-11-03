@@ -15,13 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Validación del correo: debe contener '@'
     if (!filter_var($correo_user, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('El correo debe ser un email válido.'); window.location.href = '../index.php';</script>";
+        $_SESSION['error'] = 'El correo debe ser un email válido.';
+        header('Location: ../index.php'); // Redirecciona sin JS
         exit();
     }
     
     // Validación de la contraseña: mínimo 6 caracteres
     if (strlen($contrasena) < 6) {
-        echo "<script>alert('La contraseña debe tener al menos 6 caracteres.'); window.location.href = '../index.php';</script>";
+        $_SESSION['error'] = 'La contraseña debe tener al menos 6 caracteres.';
+        header('Location: ../index.php'); // Redirecciona sin JS
         exit();
     }
 
@@ -34,15 +36,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica si se encontraron registros
     if (mysqli_num_rows($result) > 0) {
-        echo "<script>alert('El correo ya está registrado. Intenta con otro.'); window.location.href = '../index.php';</script>";
+        $_SESSION['error'] = 'El correo ya está registrado. Intenta con otro.';
+        header('Location: ../index.php'); // Redirecciona sin JS
+        exit();
     } else {
         // Inserta el nuevo usuario en la base de datos
         $sql = "INSERT INTO user (nombre_user, contrasena, correo_user) VALUES ('$nombre_user', '$hashed_password', '$correo_user')";
         
         if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('USUARIO REGISTRADO.'); window.location.href = '../index.php';</script>";
+            $_SESSION['success'] = 'USUARIO REGISTRADO.';
+            header('Location: ../index.php'); // Redirecciona sin JS
+            exit();
         } else {
-            echo "<script>alert('Error al registrar el usuario: " . mysqli_error($conn) . "'); window.location.href = '../index.php';</script>";
+            $_SESSION['error'] = 'Error al registrar el usuario: ' . mysqli_error($conn);
+            header('Location: ../index.php'); // Redirecciona sin JS
+            exit();
         }
     }
 }

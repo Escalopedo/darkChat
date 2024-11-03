@@ -8,13 +8,14 @@ include '../conexion.php';
 // Verifica si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Obtiene y sanitiza los datos del formulario
     $nombre_user = htmlspecialchars($_POST['nombre_user']);
     $correo_user = htmlspecialchars($_POST['correo_user']);
     $contrasena = htmlspecialchars($_POST['contrasena']);
     
     // Validación del correo: debe contener '@'
-    if (!strpos($correo_user, '@')) {
-        echo "<script>alert('El correo debe contener un @ válido.'); window.location.href = '../index.php';</script>";
+    if (!filter_var($correo_user, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('El correo debe ser un email válido.'); window.location.href = '../index.php';</script>";
         exit();
     }
     
@@ -24,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Hash de la contraseña
-    $hashed_password = password_hash($contrasena, PASSWORD_DEFAULT);
+    // Hash de la contraseña usando BCRYPT
+    $hashed_password = password_hash($contrasena, PASSWORD_BCRYPT);
 
     // Verifica si el correo ya está registrado
     $check_email = "SELECT * FROM user WHERE correo_user='$correo_user'";

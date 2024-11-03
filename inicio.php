@@ -93,6 +93,7 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat - Inicio</title>
     <link rel="stylesheet" href="./css/chat.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 <body>
     <div class="chat-container">

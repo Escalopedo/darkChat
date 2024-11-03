@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
+
+body {
+    font-family: 'Teko', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondochat.gif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000000;
+    overflow: hidden;
+}
+
+.chat-container {
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-image: url(../img/fondochat2.gif);
+    background-size: auto;
+    background-position: center;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.columns-container {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    height: calc(100% - 64px);
+    gap: 20px;
+}
+
+.search-friends {
+    width: 22%;
+    padding: 8px;
+    background-color: rgba(246, 246, 246, 0.9);
+    border-right: 1px solid #ddd;
+}
+
+.search-friends h3 {
+    margin: 0;
+    color: #075e54;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.search-friends input[type="text"] {
+    width: 80%; /* Ancho ajustado para que sea más corto */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    margin-top: 10px;
+    margin-right: 10%; /* Margen derecho para centrar el input */
+}
+
+.search-friends button {
+    margin-top: 10px;
+    width: 80%; /* Ancho del botón ajustado para que sea igual al input */
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #075e54;
+    color: white;
+    cursor: pointer;
+}
+
+.search-friends button:hover {
+    background-color: #064d43;
+}
+
+.friends-list {
+    width: 70%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-right: 1px solid #ddd;
+}
+
+.friends-list h3 {
+    color: #075e54;
+    font-size: 1.1em;
+    margin-top: 0;
+    text-align: center;
+}
+
+.friends-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.friend-card {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    width: calc(25% - 20px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.friend-card:hover {
+    transform: scale(1.05);
+}
+
+.chat-section {
+    width: 100%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Para poder posicionar el formulario fijo */
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-height: 400px; /* Altura máxima del área de mensajes */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    flex: 1; /* Permite que ocupe el espacio restante */
+    margin-bottom: 10px; /* Espacio inferior para el formulario */
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Mensajes enviados por el usuario (alineación derecha) */
+.message.sent {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* color para mensajes enviados */
+    text-align: right;
+}
+
+/* Mensajes recibidos (alineación izquierda) */
+.message.received {
+    align-self: flex-start;
+    background-color: #ffffff; /* color para mensajes recibidos */
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+/* Opcional: estilos para el texto de los mensajes */
+.message p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.message-form {
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    padding: 10px; /* Espaciado interno */
+    background-color: #f1f1f1; /* Color de fondo para el formulario */
+    border-top: 1px solid #e0e0e0; /* Borde superior para separación */
+}
+
+.message-form textarea {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    margin-right: 10px; /* Espaciado a la derecha */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde de la caja de texto */
+    resize: none; /* Impide cambiar el tamaño del textarea */
+    max-height: 60px; /* Altura máxima para el textarea ajustada */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.message-form button {
+    padding: 10px 15px; /* Espaciado del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    height: 100%; /* Asegura que el botón tenga la misma altura que el textarea */
+}
+
+.message-form button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+.author {
+    font-size: 12px; /* Tamaño de fuente para el autor */
+    color: #666; /* Color gris para el texto del autor */
+    margin-top: 5px; /* Espaciado superior para separar del mensaje */
+    text-align: right; /* Alinear el texto del autor a la derecha */
+    display: block; /* Hacer que el span ocupe toda la línea */
+}

@@ -28,6 +28,16 @@ session_unset(); // Limpiar las variables de sesión después de usarlas
             </form>
         </div>
 
+            <!-- Mostrar mensaje de error si existe -->
+                <?php if (isset($_SESSION['error_message'])): ?>
+            <div class="error-message">
+                <?php 
+                    echo $_SESSION['error_message']; 
+                    unset($_SESSION['error_message']); // Elimina el mensaje después de mostrarlo
+                ?>
+            </div>
+        <?php endif; ?>
+
         <div class="form-container register-container">
             <form action="./js/validaciones.php" method="POST">
                 <h1>REGISTRO</h1>

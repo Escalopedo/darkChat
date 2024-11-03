@@ -117,8 +117,99 @@ body {
     font-weight: 700;
 }
 
-.error {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 4px;
+/* Estilos para el contenedor del chat */
+.chat-container {
+    width: 80%; /* Ajusta el tamaño del contenedor general de chat */
+    max-width: 800px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo transparente */
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-section {
+    padding: 10px;
+}
+
+.chat-messages {
+    max-height: 300px; /* Limita la altura de los mensajes */
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    color: #000; /* Texto en negro para el fondo claro */
+}
+
+.message-form {
+    margin-top: 10px;
+    width: 100%; /* El formulario ocupa el ancho completo */
+}
+
+.message-form textarea {
+    width: 100%; /* Para que el área de texto ocupe el 100% del ancho */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* Evita que el usuario cambie el tamaño del área de texto */
+    box-sizing: border-box;
+    font-family: 'Teko', sans-serif;
+}
+
+.message-form button {
+    width: 100%; /* El botón ocupará el 100% del ancho del formulario */
+    padding: 15px; /* Ajusta el espacio interno */
+    background-color: #4facfe;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Teko', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.message-form button:hover {
+    background-color: #00f2fe; /* Color del botón al pasar el mouse */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.message-form {
+    margin-top: 10px;
+    width: 100%; /* El formulario ocupa el ancho completo */
+}
+
+.message-form textarea {
+    width: 100%; /* Para que el área de texto ocupe el 100% del ancho */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* Evita que el usuario cambie el tamaño del área de texto */
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    font-family: 'Teko', sans-serif;
+}
+
+.message-form button {
+    width: 100%; /* El botón ocupará el 100% del ancho del formulario */
+    padding: 15px; /* Ajusta el espacio interno */
+    background-color: #4facfe;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Teko', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
 }

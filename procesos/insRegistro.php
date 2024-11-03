@@ -12,9 +12,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo_user = htmlspecialchars($_POST['correo_user']);
     $contrasena = htmlspecialchars($_POST['contrasena']);
     
+    // Validación del correo: debe contener '@'
+    if (!strpos($correo_user, '@')) {
+        echo "<script>alert('El correo debe contener un @ válido.'); window.location.href = '../index.php';</script>";
+        exit();
+    }
+    
+    // Validación de la contraseña: mínimo 6 caracteres
+    if (strlen($contrasena) < 6) {
+        echo "<script>alert('La contraseña debe tener al menos 6 caracteres.'); window.location.href = '../index.php';</script>";
+        exit();
+    }
+
     // Hash de la contraseña
     $hashed_password = password_hash($contrasena, PASSWORD_DEFAULT);
-    
+
     // Verifica si el correo ya está registrado
     $check_email = "SELECT * FROM user WHERE correo_user='$correo_user'";
     $result = mysqli_query($conn, $check_email);
@@ -29,10 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_query($conn, $sql)) {
             echo "<script>alert('USUARIO REGISTRADO.'); window.location.href = '../index.php';</script>";
         } else {
-            echo "Error: " . mysqli_error($conn);
+            echo "<script>alert('Error al registrar el usuario: " . mysqli_error($conn) . "'); window.location.href = '../index.php';</script>";
         }
     }
 }
 
+// Cierra la conexión
 mysqli_close($conn);
 ?>

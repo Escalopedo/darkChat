@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
             </div>
         </div>
     </div>
-            <form action="chat.php" method="POST" class="message-form">
+        <form action="chat.php" method="POST" class="message-form">
             <input type="hidden" name="amigo_id" value="<?php echo $amigo_id; ?>">
             <textarea name="mensaje" required></textarea>
             <button type="submit" name="enviar_mensaje">Enviar</button>

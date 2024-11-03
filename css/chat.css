@@ -127,15 +127,16 @@ header {
     display: flex;
     flex-direction: column;
     position: relative; /* Para poder posicionar el formulario fijo */
+    height: 100%; /* Asegúrate de que la sección ocupe toda la altura disponible */
 }
 
 .chat-messages {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    max-height: 400px; /* Altura máxima del área de mensajes */
+    max-height: calc(100% - 70px); /* Ajusta la altura máxima para dejar espacio para el formulario */
     overflow-y: auto; /* Permite el desplazamiento vertical */
-    flex: 1; /* Permite que ocupe el espacio restante */
+    flex-grow: 1; /* Permite que ocupe el espacio restante */
     margin-bottom: 10px; /* Espacio inferior para el formulario */
 }
 

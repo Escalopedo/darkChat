@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         // Si no hay errores, envía el formulario a insRegistro.php
-        include 'insRegistro.php';
+        include '../procesos/insRegistro.php';
         exit();
     }
 }

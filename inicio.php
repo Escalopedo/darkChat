@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexion.php'; // Asegúrate de que este archivo esté en el mismo directorio
+include 'conexion.php';
 
 // Verifica si el usuario ha iniciado sesión
 if (!isset($_SESSION['user_id'])) {
@@ -124,7 +124,7 @@ $usuarios = mysqli_fetch_all($result_usuarios, MYSQLI_ASSOC);
                 </div>
             </div>
 
-            <!-- Sección de solicitudes pendientes (derecha) -->
+            <!-- Sección de solicitudes pendientes (en la derecha) -->
             <div class="solicitudes-list">
                 <h3>Solicitudes Pendientes</h3>
                 <div class="solicitudes-container">

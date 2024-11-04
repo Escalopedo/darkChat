@@ -4,7 +4,7 @@ $errors = $_SESSION['errors'] ?? [];
 $username = $_SESSION['nombre_user'] ?? '';
 $email = $_SESSION['correo_user'] ?? '';
 $password = $_SESSION['contrasena'] ?? '';
-session_unset(); // Limpiar las variables de sesión después de usarlas
+session_unset(); // Limpiamos las variables de sesión después de usarlas
 ?>
 
 <!DOCTYPE html>

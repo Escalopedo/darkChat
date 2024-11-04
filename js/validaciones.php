@@ -48,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['errors'] = $errors;
         $_SESSION['nombre_user'] = $username;
         $_SESSION['correo_user'] = $email;
-        $_SESSION['contrasena'] = $password; // Aunque esto no es necesario, se incluye para mantener el valor
-        header("Location: ../index.php"); // Asegúrate de que esta ruta sea correcta
+        $_SESSION['contrasena'] = $password;
+        header("Location: ../index.php");
         exit();
     } else {
         // Si no hay errores, envía el formulario a insRegistro.php

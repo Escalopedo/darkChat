@@ -28,8 +28,8 @@ session_unset(); // Limpiamos las variables de sesión después de usarlas
             </form>
         </div>
 
-            <!-- Mostrar mensaje de error si existe -->
-                <?php if (isset($_SESSION['error_message'])): ?>
+        <!-- Mostrar mensaje de error si existe -->
+        <?php if (isset($_SESSION['error_message'])): ?>
             <div class="error-message">
                 <?php 
                     echo $_SESSION['error_message']; 

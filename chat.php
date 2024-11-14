@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include 'conexion.php'; // Asegúrate de que este archivo esté en el mismo directorio
@@ -35,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
         $query = "INSERT INTO mensajes (id_emisor, id_receptor, texto) VALUES ($user_id, $amigo_id, '$mensaje')";
         mysqli_query($conn, $query);
         header("Location: chat.php");  
-        exit(); // Asegúrate de salir después de la redirección
-    }
+}
 }
 ?>
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
     <link rel="stylesheet" href="./css/chat.css">
 </head>
 <body>
-    <div class="chat-page">
+    <div class="chat-container">
         <header>
             <h2>Chat con amigo</h2>
         </header>
@@ -65,14 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar_mensaje'])) {
                 <?php endforeach; ?>
             </div>
         </div>
-
-        <div class="text-enviar">
-            <form action="chat.php" method="POST" class="message-form">
-                <input type="hidden" name="amigo_id" value="<?php echo $amigo_id; ?>">
-                <textarea name="mensaje" required placeholder="Escribe tu mensaje..."></textarea>
-                <button type="submit" name="enviar_mensaje">Enviar</button>
-            </form>
-        </div>
     </div>
+        <form action="chat.php" method="POST" class="message-form">
+            <input type="hidden" name="amigo_id" value="<?php echo $amigo_id; ?>">
+            <textarea name="mensaje" required></textarea>
+            <button type="submit" name="enviar_mensaje">Enviar</button>
+        </form>
 </body>
 </html>

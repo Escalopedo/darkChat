@@ -1,10 +1,22 @@
 <?php
 session_start();
-$errors = $_SESSION['errors'] ?? [];
-$username = $_SESSION['nombre_user'] ?? '';
-$email = $_SESSION['correo_user'] ?? '';
-$password = $_SESSION['contrasena'] ?? '';
-session_unset(); // Limpiamos las variables de sesión después de usarlas
+
+// Verifica si hay mensajes de error o éxito en la sesión
+if (isset($_SESSION['error'])) {
+    echo "<div style='color: red;'>" . $_SESSION['error'] . "</div>";
+    unset($_SESSION['error']); // Elimina el mensaje después de mostrarlo
+}
+
+if (isset($_SESSION['success'])) {
+    echo "<div style='color: green;'>" . $_SESSION['success'] . "</div>";
+    unset($_SESSION['success']); // Elimina el mensaje después de mostrarlo
+}
+
+if (isset($_SESSION['error_message'])) {
+    echo "<div class='error-message' style='color: red;'>" . $_SESSION['error_message'] . "</div>";
+    unset($_SESSION['error_message']); // Elimina el mensaje después de mostrarlo
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +27,6 @@ session_unset(); // Limpiamos las variables de sesión después de usarlas
     <title>DARK WEB</title>
     <link rel="stylesheet" href="./css/estilos.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    <script src="./js/validaciones.js"></script>
 </head>
 <body>
     <div class="container">
@@ -27,35 +38,12 @@ session_unset(); // Limpiamos las variables de sesión después de usarlas
                 <button type="submit">ENTRAR</button>
             </form>
         </div>
-
-        <!-- Mostrar mensaje de error si existe -->
-        <?php if (isset($_SESSION['error_message'])): ?>
-            <div class="error-message">
-                <?php 
-                    echo $_SESSION['error_message']; 
-                    unset($_SESSION['error_message']); // Elimina el mensaje después de mostrarlo
-                ?>
-            </div>
-        <?php endif; ?>
-
         <div class="form-container register-container">
-            <form action="./js/validaciones.php" method="POST">
+            <form action="./procesos/insRegistro.php" method="POST">
                 <h1>REGISTRO</h1>
-                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" value="<?php echo htmlspecialchars($username); ?>" onblur="validateUsername(this)">
-                <?php if (!empty($errors['nombre_user'])): ?>
-                    <p class="error"><?php echo $errors['nombre_user']; ?></p>
-                <?php endif; ?>
-
-                <input type="email" name="correo_user" placeholder="Correo Electrónico" value="<?php echo htmlspecialchars($email); ?>" onblur="validateEmail(this)">
-                <?php if (!empty($errors['correo_user'])): ?>
-                    <p class="error"><?php echo $errors['correo_user']; ?></p>
-                <?php endif; ?>
-
-                <input type="password" name="contrasena" placeholder="Contraseña" value="<?php echo htmlspecialchars($password); ?>" onblur="validatePassword(this)">
-                <?php if (!empty($errors['contrasena'])): ?>
-                    <p class="error"><?php echo $errors['contrasena']; ?></p>
-                <?php endif; ?>
-
+                <input type="text" name="nombre_user" placeholder="Nombre de Usuario" >
+                <input type="email" name="correo_user" placeholder="Correo Electrónico" >
+                <input type="password" name="contrasena" placeholder="Contraseña" >
                 <button type="submit">REGISTRARSE</button>
             </form>
         </div>

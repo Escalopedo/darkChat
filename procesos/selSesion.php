@@ -1,44 +1,46 @@
 <?php
 // Inicia la sesión
 session_start();
+
+// Incluye el archivo de conexión a la base de datos
 include '../conexion.php';
 
+// Verifica si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo_user = htmlspecialchars($_POST['correo_user']);
     $contrasena = htmlspecialchars($_POST['contrasena']);
-
-    // Verifica si el usuario es el administrador
-    if ($correo_user === 'admin@gmail.com' && $contrasena === 'qweQWE123') {
-        $_SESSION['user_id'] = 0; // ID especial para el administrador
-        $_SESSION['nombre_user'] = 'Administrador';
-        $_SESSION['es_admin'] = true;
-        header("Location: ../inicio.php");
-        exit();
-    }
-
-    // Consulta para usuarios regulares
+    
+    // Consulta para obtener el usuario
     $sql = "SELECT * FROM user WHERE correo_user='$correo_user'";
     $result = mysqli_query($conn, $sql);
 
+    // Verifica si el usuario existe
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-
+        
+        // Verifica la contraseña
         if (password_verify($contrasena, $user['contrasena'])) {
+            // Almacena la información del usuario en la sesión
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['nombre_user'] = $user['nombre_user'];
-            $_SESSION['es_admin'] = false; // No es administrador
+            
+            // Redirige al usuario a la página de inicio
             header("Location: ../inicio.php");
             exit();
         } else {
-            $_SESSION['error_message'] = 'Contraseña incorrecta.';
-            header("Location: ../index.php");
+            // Guarda el mensaje de error en la sesión
+            $_SESSION['error_message'] = 'CONTRASEÑA INCORRECTA.';
+            header("Location: ../index.php"); // Redirige a la página de inicio de sesión
             exit();
         }
     } else {
-        $_SESSION['error_message'] = 'Usuario no existe.';
-        header("Location: ../index.php");
+        // Guarda el mensaje de error en la sesión
+        $_SESSION['error_message'] = 'USUARIO NO EXISTE.';
+        header("Location: ../index.php"); // Redirige a la página de inicio de sesión
         exit();
     }
 }
+
+// Cierra la conexión
 mysqli_close($conn);
 ?>

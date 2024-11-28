@@ -211,3 +211,61 @@ header {
 .message:last-child {
     margin-bottom: 20px;
 }
+
+/* Estilos básicos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.btn-eliminar {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Estilos básicos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.btn-eliminar {
+    background-color: #f44336; /* Rojo */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-modificar {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-eliminar:hover, .btn-modificar:hover {
+    opacity: 0.8;
+}

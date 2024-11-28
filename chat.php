@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include 'conexion.php'; // Asegúrate de que este archivo esté en el mismo directorio

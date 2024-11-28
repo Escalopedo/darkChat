@@ -37,4 +37,18 @@ CREATE TABLE mensajes (
     texto VARCHAR(250) NOT NULL,
     FOREIGN KEY (id_emisor) REFERENCES user(id),
     FOREIGN KEY (id_receptor) REFERENCES user(id)
+<<<<<<< HEAD
 );  
+
+-- Resumen de relaciones:
+-- 1. Relación entre `user` y `solicitudes`: Uno a Muchos
+-- Un usuario puede enviar y recibir múltiples solicitudes de amistad.
+-- 
+-- 2. Relación entre `user` y `amigos`: Muchos a Muchos (a través de la tabla `amigos`)
+-- Un usuario puede tener múltiples amigos, y cada relación de amistad es bidireccional.
+--
+-- 3. Relación entre `user` y `mensajes`: Uno a Muchos
+-- Un usuario puede enviar y recibir múltiples mensajes, pero cada mensaje tiene un único emisor y receptor.
+=======
+);  
+>>>>>>> 755c8804236bebb2af65292eab5f11fd6079de69
